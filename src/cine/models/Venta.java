@@ -11,7 +11,7 @@ public class Venta {
     private ArrayList <Boleta> boletas;
 
     public Venta() {
-        this.numVenta = 0;
+        this.numVenta ++;
         this.fecha = new Date();
         this.boletas = new ArrayList<>();   
     }
@@ -26,10 +26,30 @@ public class Venta {
     
     public void modificarBoleta(long id,Boleta boleta){
         for (int i = 0; i < this.boletas.size(); i++) {
-
+            if (this.boletas.get(i).getId() == id) {
+                this.boletas.set(i, boleta);              
+            }
         }    
     }   
-    
-    
+
+    public double calcularValorTotal() {
+        double valorTotal = 0;
+        for (int i = 0; i < boletas.size(); i++) {
+            valorTotal += boletas.get(i).getValorBoleta();
+        }
+        return valorTotal;
+    }
+
+    public int getNumVenta() {
+        return numVenta;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public ArrayList<Boleta> getBoletas() {
+        return boletas;
+    }
     
 }

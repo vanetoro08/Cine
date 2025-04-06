@@ -5,15 +5,28 @@ public class Boleta {
     private int id; 
     private Funcion funcionSeleccionada; 
     private Usuario usuario; 
-    private double valorBoleta = 0; 
+    private double valorBoleta = 0;
+
+    public Boleta(int id, Funcion funcionSeleccionada, Usuario usuario) {
+        this.id = id;
+        this.funcionSeleccionada = funcionSeleccionada;
+        this.usuario = usuario;
+    }
+        
     
+
     public void calcularValorBoleta(){
-        Pelicula pelicula = this.funcionSeleccionada.pelicula;
-        this.valorBoleta += this.usuario.aplicarDescuento(this.funcionSeleccionada.aplicarDescuento(pelicula.getCostoBase()));
+        this.valorBoleta += this.usuario.aplicarDescuento(this.funcionSeleccionada.aplicarDescuento());
     }
 
     public double getValorBoleta() {
         return valorBoleta;
+      
     }
+
+    public int getId() {
+        return id;
+    }
+       
     
 }
