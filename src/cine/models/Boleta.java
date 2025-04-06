@@ -8,7 +8,12 @@ public class Boleta {
     private double valorBoleta = 0; 
     
     public void calcularValorBoleta(){
-        
+        Pelicula pelicula = this.funcionSeleccionada.pelicula;
+        this.valorBoleta += this.usuario.aplicarDescuento(this.funcionSeleccionada.aplicarDescuento(pelicula.getCostoBase()));
+    }
+
+    public double getValorBoleta() {
+        return valorBoleta;
     }
     
 }
