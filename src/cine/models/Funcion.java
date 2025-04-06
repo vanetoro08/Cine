@@ -7,7 +7,8 @@ import java.util.Date;
 public abstract class Funcion {
     protected Date fechaHora;
     protected double porcentajeDescuento;
-
+    protected Pelicula pelicula; 
+    
     public Funcion(Date fechaHora) {
         this.fechaHora = fechaHora;
     }    
