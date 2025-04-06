@@ -27,6 +27,10 @@ public class Boleta {
     public int getId() {
         return id;
     }
-       
+
+    public Funcion getFuncionSeleccionada() {
+        return funcionSeleccionada;
+    }
+      
     
 }

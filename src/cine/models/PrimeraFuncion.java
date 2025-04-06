@@ -5,8 +5,8 @@ import java.util.Date;
 // @author vanes
 public class PrimeraFuncion extends Funcion{
 
-    public PrimeraFuncion(Date fechaHora,Pelicula pelicula) {
-        super(fechaHora,pelicula);
+    public PrimeraFuncion(Date fechaHora,Pelicula pelicula, String id) {
+        super(fechaHora,pelicula, id);
         this.porcentajeDescuento = 0.5;
     }
 

@@ -8,10 +8,12 @@ public abstract class Funcion {
     protected Date fechaHora;
     protected double porcentajeDescuento;
     protected Pelicula pelicula; 
+    protected String id; 
     
-    public Funcion(Date fechaHora,Pelicula pelicula) {
+    public Funcion(Date fechaHora,Pelicula pelicula, String id) {
         this.fechaHora = fechaHora;
         this.pelicula = pelicula;
+        this.id = id; 
     }    
     
     public abstract double aplicarDescuento();

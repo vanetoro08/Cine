@@ -7,8 +7,8 @@ import java.util.Date;
 // @author vanes
 public class FuncionNoche extends Funcion{
 
-    public FuncionNoche(Date fechaHora,Pelicula pelicula) {
-        super(fechaHora,pelicula);
+    public FuncionNoche(Date fechaHora,Pelicula pelicula, String id) {
+        super(fechaHora,pelicula, id);
         this.porcentajeDescuento = 0;
     }    
 
