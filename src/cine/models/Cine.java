@@ -36,6 +36,7 @@ public class Cine {
     public void agregarUsuario(Usuario usuarioNuevo){
         this.usuarios.add(usuarioNuevo);
     }
+    
     public void actualizarUsuario(Usuario usuarioActualizado, String id){
         for (int i = 0 ; i<this.usuarios.size(); i++){
             Usuario usuario = this.usuarios.get(i);
@@ -68,10 +69,10 @@ public class Cine {
         System.out.println("usuarios: ");
         for(int i= 0 ; i<this.usuarios.size() ; i++){
             Usuario usuario = this.usuarios.get(i);
-            System.out.println( i+1 +") nombre:" + usuario.nombre + " id: " + usuario.id + " telefono: " + usuario.telefono);
+            System.out.println( (i+1) +" nombre:" + usuario.nombre + " id: " + usuario.id + " telefono: " + usuario.telefono);
         }
     }
-    
+
     public void agregarFuncion(Funcion funcionNueva){
         this.funciones.add(funcionNueva);
     }
@@ -101,6 +102,10 @@ public class Cine {
         for (int i=0; i<this.funciones.size(); i++){
             Funcion funcion = this.funciones.get(i);
             Pelicula pelicula = funcion.getPelicula();
+            System.out.println("Funcion #" + (i + 1));
+            System.out.println("id: " + funcion.id);
+            System.out.println("Pelicula: " + pelicula.getNombre());
+            System.out.println("Costo base: $" + pelicula.getCostoBase());       
             System.out.println("");
         }
     }
@@ -119,12 +124,14 @@ public class Cine {
                 }
             }
             Boleta boletaNueva = new Boleta( idAleatorio, funcion , usuario);
+            boletaNueva.calcularValorBoleta();
             venta.agregarBoleta(boletaNueva);
         }
         Factura facturaNueva = new Factura(venta);
         System.out.println("venta #"+ venta.getNumVenta());
         this.facturas.add(facturaNueva);  
     }
+    
     public void generarFactura(int numVenta){
         for(int i=0; i< facturas.size(); i++){
             Factura factura = facturas.get(i);
@@ -135,4 +142,22 @@ public class Cine {
             }
         }
     }
+    
+    public ArrayList<Pelicula> getPeliculas() {
+        return peliculas;
+    }
+    
+    public ArrayList<Funcion> getFunciones() {
+        return funciones;
+    }
+
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public ArrayList<Factura> getFacturas() {
+        return facturas;
+    }
+    
+    
 }

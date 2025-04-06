@@ -14,5 +14,10 @@ public abstract class Usuario {
     }
     
     public abstract double aplicarDescuento(double precio);
+
+    public String getId() {
+        return id;
+    }
+        
     
 }

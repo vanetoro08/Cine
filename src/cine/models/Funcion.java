@@ -21,4 +21,10 @@ public abstract class Funcion {
     public Pelicula getPelicula(){
         return pelicula;
     }
+
+    public String getId() {
+        return id;
+    }
+    
+    
 }

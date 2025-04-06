@@ -16,7 +16,7 @@ public class Boleta {
     
 
     public void calcularValorBoleta(){
-        this.valorBoleta += this.usuario.aplicarDescuento(this.funcionSeleccionada.aplicarDescuento());
+        this.valorBoleta = this.usuario.aplicarDescuento(this.funcionSeleccionada.aplicarDescuento());
     }
 
     public double getValorBoleta() {
