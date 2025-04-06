@@ -9,9 +9,14 @@ public abstract class Funcion {
     protected double porcentajeDescuento;
     protected Pelicula pelicula; 
     
-    public Funcion(Date fechaHora) {
+    public Funcion(Date fechaHora,Pelicula pelicula) {
         this.fechaHora = fechaHora;
+        this.pelicula = pelicula;
     }    
     
-    public abstract double aplicarDescuento(double precio);
+    public abstract double aplicarDescuento();
+    
+    public Pelicula getPelicula(){
+        return pelicula;
+    }
 }
