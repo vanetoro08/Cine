@@ -39,14 +39,17 @@ public class Main {
             System.out.println("2. Agregar usuario");
             System.out.println("3. Agregar funcion");
             System.out.println("4. Vender boletas");
-            System.out.println("5. Mostrar peliculas");
+            System.out.println("\n5. Mostrar peliculas");
             System.out.println("6. Mostrar usuarios");
             System.out.println("7. Mostrar funciones");
-            System.out.println("8. Eliminar pelicula");
+            System.out.println("\n8. Eliminar pelicula");
             System.out.println("9. Eliminar usuario");
             System.out.println("10. Eliminar funcion");
             System.out.println("11. Generar factura");
-            System.out.println("12. Salir");
+            System.out.println("\n12. Actualizar pelicula");
+            System.out.println("13. Actualizar usuario");
+            System.out.println("14. Actualizar funcion");
+            System.out.println("15. Salir");
             System.out.print("Ingrese una opcion: ");
             opci = scanner.nextInt();
             scanner.nextLine();
@@ -227,7 +230,7 @@ public class Main {
                     break;
 
                 case 10:
-                    /** Elimina una función por id */
+                    /** Elimina una funcion por id */
                     cine.mostrarFunciones();
                     System.out.print("Ingrese el id de la función a eliminar: ");
                     String idFuncionEliminar = scanner.nextLine();
@@ -242,12 +245,99 @@ public class Main {
                     scanner.nextLine();
                     cine.generarFactura(numVenta);
                     break;
+                    
+                case 12:
+                    /** Actualiza una película existente */
+                    cine.mostrarPeliculas();
+                    System.out.print("Ingrese el nombre de la pelicula a actualizar: ");
+                    String nombrePeliBuscar = scanner.nextLine();
+
+                    System.out.print("Nuevo nombre de la pelicula: ");
+                    String nuevoNombre = scanner.nextLine();
+                    System.out.print("Nuevo costo base: ");
+                    double nuevoCosto = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    Pelicula peliculaActualizada = new Pelicula(nuevoNombre, nuevoCosto);
+                    cine.actualizarPelicula(peliculaActualizada, nombrePeliBuscar);
+                    System.out.println("Pelicula actualizada");
+                    break;
+                    
+                case 13:
+                    /** Actualiza un usuario existente */
+                    cine.mostrarUsuarios();
+                    System.out.print("Ingrese el id del usuario a actualizar: ");
+                    String idUsuarioBuscar = scanner.nextLine();
+
+                    System.out.print("Nuevo nombre del usuario: ");
+                    String nuevoNombreUsuario = scanner.nextLine();
+                    System.out.print("Nuevo telefono: ");
+                    String nuevoTelefono = scanner.nextLine();
+
+                    System.out.println("Nuevo tipo de usuario:" 
+                            + "\n 1. Niño"
+                            + "\n 2. Adulto"
+                            + "\n 3. Mayor");
+                    int nuevoTipo = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Usuario usuarioActualizado;
+                    if (nuevoTipo == 1) {
+                        usuarioActualizado = new UsuarioNiño(nuevoNombreUsuario, idUsuarioBuscar, nuevoTelefono);
+                    } else if (nuevoTipo == 2) {
+                        usuarioActualizado = new UsuarioAdulto(nuevoNombreUsuario, idUsuarioBuscar, nuevoTelefono);
+                    } else {
+                        usuarioActualizado = new UsuarioMayor(nuevoNombreUsuario, idUsuarioBuscar, nuevoTelefono);
+                    }
+
+                    cine.actualizarUsuario(usuarioActualizado, idUsuarioBuscar);
+                    System.out.println("Usuario actualizado");                    
+                    break;
+                case 14:
+                    /** Actualiza una funcion existente */
+                    cine.mostrarFunciones();
+                    System.out.print("Ingrese el id de la funcion a actualizar: ");
+                    String idFuncionBuscar = scanner.nextLine();
+
+                    cine.mostrarPeliculas();
+                    System.out.print("Seleccione el numero de la nueva pelicula para la funcion: ");
+                    int nuevaPeliIndex = scanner.nextInt() - 1;
+                    scanner.nextLine();
+                    Pelicula nuevaPeli = cine.getPeliculas().get(nuevaPeliIndex);
+
+                    System.out.println("Nuevo tipo de funcion:"
+                            + "\n 1. Primera"
+                            + "\n 2. Tarde"
+                            + "\n 3. Noche");
+                    int nuevoTipoFuncion = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Date nuevaFecha = new Date();
+                    Funcion funcionActualizada = null;
+
+                    switch (nuevoTipoFuncion) {
+                        case 1:
+                            funcionActualizada = new PrimeraFuncion(nuevaFecha, nuevaPeli, idFuncionBuscar);
+                            break;
+                        case 2:
+                            funcionActualizada = new FuncionTarde(nuevaFecha, nuevaPeli, idFuncionBuscar);
+                            break;
+                        case 3:
+                            funcionActualizada = new FuncionNoche(nuevaFecha, nuevaPeli, idFuncionBuscar);
+                            break;
+                    }
+
+                    cine.actualizarFuncion(funcionActualizada, idFuncionBuscar);
+                    System.out.println("Funcion actualizada");
+                    break;
+                case 15:
+                    break;
 
                 default:
                     System.out.println("Ingrese otra opcion");
             }
 
-        } while (opci != 12);
+        } while (opci != 15);
 
         scanner.close();
     }
