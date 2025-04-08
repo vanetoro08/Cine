@@ -1,5 +1,7 @@
 package cine.models;
 
+import cine.exceptions.ValorBoletaInvalidoException;
+
 /**
  * Representa una boleta para una funcion de cine
  * 
@@ -27,8 +29,9 @@ public class Boleta {
     /**
      * Calcula el valor final de la boleta aplicando los descuentos de la funcion y del tipo de usuario
      */
-    public void calcularValorBoleta() {
+    public void calcularValorBoleta() throws ValorBoletaInvalidoException{
         this.valorBoleta = this.usuario.aplicarDescuento(this.funcionSeleccionada.aplicarDescuento());
+        if (valorBoleta <= 0) throw new ValorBoletaInvalidoException();
     }
 
     /**

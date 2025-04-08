@@ -1,4 +1,5 @@
 package cine.models;
+import cine.exceptions.ValorBoletaInvalidoException;
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -174,22 +175,26 @@ public class Cine {
      * @param usuarios Lista de usuarios que compraran boletas
      * @param funcion Funcion para la que se realiza la venta
      */    
-    public void venderBoletas(ArrayList<Usuario> usuarios , Funcion funcion){
+    public void venderBoletas(ArrayList<Usuario> usuarios , Funcion funcion) throws ValorBoletaInvalidoException{
         Venta venta= new Venta();
         for(int i = 0 ; i<usuarios.size(); i++ ){
             Usuario usuario = usuarios.get(i);
             Random aleatorio = new Random(System.currentTimeMillis());
             int idAleatorio = aleatorio.nextInt(10000);
             for(int j= 0; j<venta.getBoletas().size(); j++){
-                Boleta boleta = venta.getBoletas().get(i);
+                Boleta boleta = venta.getBoletas().get(j);
                 if(idAleatorio==boleta.getId()){
                     aleatorio.setSeed(System.currentTimeMillis());
                     idAleatorio = aleatorio.nextInt(10000);
                 }
             }
             Boleta boletaNueva = new Boleta( idAleatorio, funcion , usuario);
-            boletaNueva.calcularValorBoleta();
-            venta.agregarBoleta(boletaNueva);
+            try {
+                boletaNueva.calcularValorBoleta();
+                venta.agregarBoleta(boletaNueva);
+            } catch (ValorBoletaInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
         }
         Factura facturaNueva = new Factura(venta);
         System.out.println("venta #"+ venta.getNumVenta());
